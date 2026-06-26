@@ -1,6 +1,8 @@
 *.coloc
 *.included
 *.cojo
+!tests/fixtures/**/expected/
+!tests/fixtures/**/expected/**
 
 *.suo
 *.db
@@ -17,7 +19,29 @@
 *.tlog
 *.lastbuildstate
 *.log
+pwcoco_log.txt
+
+build/
+*.o
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+dist/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
 
 *.vcxproj
 *.iobj
 *.ipdb
+
+sandbox/
+tmp/
+temp/
+logs/

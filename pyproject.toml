@@ -1,0 +1,46 @@
+[build-system]
+requires = ["scikit-build-core>=0.9", "nanobind>=1.3.2"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pwcoco"
+dynamic = ["version"]
+description = "Pair-wise Conditional and Colocalisation analysis"
+readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: C++",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+]
+
+[project.scripts]
+pwcoco = "pwcoco.cli:main"
+
+[project.optional-dependencies]
+dev = ["pre-commit", "pytest", "ruff", "cmake", "ninja"]
+
+[dependency-groups]
+dev = ["pre-commit", "pytest", "ruff", "cmake", "ninja"]
+
+[tool.scikit-build.metadata.version]
+provider = "scikit_build_core.metadata.regex"
+input = "python/pwcoco/_version.py"
+
+[tool.scikit-build]
+cmake.version = ">=3.15"
+wheel.py-api = "cp312"
+wheel.packages = ["python/pwcoco"]
+build-dir = "build/{wheel_tag}"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

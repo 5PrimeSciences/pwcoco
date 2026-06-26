@@ -1,0 +1,7 @@
+Dataset1	Dataset2	SNP1	SNP2	nsnps	H0	H1	H2	H3	H4	log_abf_all
+atp1a4_test.exp.txt	atp1a4_test.out.txt	unconditioned	unconditioned	4033	2.96636e-14	0.0211886	1.36776e-12	0.976987	0.00182481	31.1489
+atp1a4_test.exp.txt	atp1a4_test.out.txt	rs10752637	unconditioned	3874	6.8067e-30	0.0207878	3.13622e-28	0.957787	0.0214248	67.1596
+atp1a4_test.exp.txt	atp1a4_test.out.txt	rs11265323	unconditioned	3874	8.38649e-39	0.0210769	3.86405e-37	0.971104	0.00781877	87.6742
+atp1a4_test.exp.txt	atp1a4_test.out.txt	rs16831388	unconditioned	3874	1.448e-35	0.0212285	6.67159e-34	0.978092	0.000679164	80.2203
+atp1a4_test.exp.txt	atp1a4_test.out.txt	rs2369473	unconditioned	3874	6.00711e-27	0.0172093	2.7684e-25	0.792911	0.18988	60.3769
+atp1a4_test.exp.txt	atp1a4_test.out.txt	rs2753267	unconditioned	3874	1.52119e-41	0.0212289	7.00881e-40	0.978109	0.000661794	93.9865

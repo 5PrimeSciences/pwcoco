@@ -1,5 +1,5 @@
 # Pair-Wise Conditional analysis and Colocalisation analysis (PWCoCo)
-A C++ implementation of the PWCoCo algorithm first described by Zheng, et al in their paper, [Phenome-wide Mendelian randomization mapping the influence of the plasma proteome on complex diseases](https://doi.org/10.1038/s41588-020-0682-6). 
+A C++ implementation of the PWCoCo algorithm first described by Zheng, et al in their paper, [Phenome-wide Mendelian randomization mapping the influence of the plasma proteome on complex diseases](https://doi.org/10.1038/s41588-020-0682-6).
 
 This tool integrates methods from [GCTA-COJO](https://cnsgenomics.com/software/gcta/#Overview) and the [coloc](https://chr1swallace.github.io/coloc/index.html) R package.
 
@@ -31,16 +31,50 @@ Additional Libraries:
 
 These additional libraries are bundled in `/include/` at the required versions for ease of the user.
 
+## Install (local)
+
+PWCoCo can be installed as a Python package with the C++ extension and CLI entry point:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install nanobind scikit-build-core cmake ninja
+pip install -ve . --no-build-isolation
+```
+
+Verify the install:
+
+```bash
+pwcoco --help
+
+python -c "
+import pwcoco
+r = pwcoco.run(
+    bfile='tests/fixtures/atp1a4/input/atp1a4_test',
+    sum_stats1='tests/fixtures/atp1a4/input/atp1a4_test.exp.txt',
+    sum_stats2='tests/fixtures/atp1a4/input/atp1a4_test.out.txt',
+    out='/tmp/pwcoco_py_out',
+    threads=1,
+)
+print(r['rows'][0]['H4'])
+"
+
+pytest tests/test_e2e_cli.py tests/test_e2e_python.py -v
+```
+
+For C++-only builds (e.g. downstream Docker images that call the binary directly), use CMake as below.
+
 ## How to Build
 Currently, only Unix and Windows are supported.
 
 ### Unix
-To build on Unix systems, clone this repository and follow the code below:
-```
-mkdir build
-cd build
-cmake ..
-make
+To build on Unix systems, clone this repository and run:
+
+```bash
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+./build/pwcoco --help
 ```
 
 If building on the University of Bristol's HPC, load the module `languages/gcc-9.1.0` and ensure this is the **only** gcc module loaded. Also, if you do not have a cmake module loaded, please load, for example, `tools/cmake-3.13.4`. This should be all you need to build the program.
@@ -63,7 +97,7 @@ For acceptable formats for these files, please see below.
 - `--log` - specifies log name, default is "pwcoco_log.txt" and will save in the same folder from where the program is run.
 - `--out` - prefix for the result files, default is "pwcoco_out".
 - `--p_cutoff` - P value cutoff for SNPs to be selected by the stepwise selection process, default is 5e-8. Alternatively, the flags `--p_cutoff1` and `--p_cutoff2` may be used to specify dataset-specific P value cutoffs, relative to the order of the data given in the `--sum_stats` flags.
-- `--chr` - when reading the reference files, the program will limit the analysis to those SNPs on this chromosome. 
+- `--chr` - when reading the reference files, the program will limit the analysis to those SNPs on this chromosome.
 - `--top_snp` - maximum number of SNPs that may be selected by the stepwise selection process, default is 1e10, i.e. a lot.
 - `--ld_window` - distance (in kb) that, when exceeded, is assumed for SNPs to be in total LE, default is 1e7.
 - `--collinear` - threshold that, when exceeded, determines if SNPs are collinear, default is 0.9.
@@ -72,7 +106,7 @@ For acceptable formats for these files, please see below.
 - `--init_h4` - PWCoCo will run an initial colocalisation on the unconditioned dataset. If the H4 for this analysis reaches this threshold, the program will terminate early. Default is 80 (i.e. 80%). Set to 0 if you would like the program to always continue regardless of the initial colocalisation result.
 - `--out_cond` - would you like for the conditioned data to be saved as text files as well? Just including this flag will work (no extra argument following this flag is necessary).
 - `--coloc_pp` - specify the three prior probability Ps: the next **three** arguments must be the P values, default is 1e-4, 1e-4 and 1e-5.
-- `--n1` - also `--n2`, specify the sample size (see also next flag) for the corresponding summary statistics. 
+- `--n1` - also `--n2`, specify the sample size (see also next flag) for the corresponding summary statistics.
 - `--n1_case` - also `--n2_case`, specify the number of cases for the corresponding summary statistics.
 - `--threads` - sets number of threads available for OpenMP multi-threaded functions, default is 8.
 - `--verbose` - if this flag is given, PWCoCo will output files which can be used for debugging purposes. These files include SNPs which did not match the allele frequency given in the reference data and included SNPs within the analysis. Also sets `--out_cond` flag. (No extra argument following this flag is necessary).
@@ -89,7 +123,7 @@ There are two options and cases for the user as to how they provide their summar
 
 #### Case 1 - Few analyses
 
-If only a few analyses are required to be run (< 100, for example) then it is more efficient to run PWCoCo separately for each of the file pairs (e.g. exposure vs outcome). In that case, using the `--sum_stats1` and `--sum_stats2` flags to point to the summary statistic files is better, as it allows the user to specify flags which will speed up the reference data loading (e.g. `--chr`). 
+If only a few analyses are required to be run (< 100, for example) then it is more efficient to run PWCoCo separately for each of the file pairs (e.g. exposure vs outcome). In that case, using the `--sum_stats1` and `--sum_stats2` flags to point to the summary statistic files is better, as it allows the user to specify flags which will speed up the reference data loading (e.g. `--chr`).
 
 #### Case 2 - Many analyses - **BETA FEATURE**
 
