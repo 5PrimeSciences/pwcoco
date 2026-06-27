@@ -60,8 +60,7 @@ void print_help() {
     spdlog::info("	--ld_window                Distance in kb that is assumed for SNPs to be in total "
                  "linkage equilibrium; default is 1e7.");
     spdlog::info("");
-    spdlog::info(
-        "	--collinear                Threshold that determines if SNPs are collinear; default is 0.9.");
+    spdlog::info("	--collinear                Threshold that determines if SNPs are collinear; default is 0.9.");
     spdlog::info("");
     spdlog::info("	--maf                      Filters SNPs from the reference dataset according to this "
                  "threshold; default is 0.1.");

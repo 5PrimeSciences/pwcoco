@@ -45,6 +45,7 @@ set(PWCOCO_CORE_SOURCES
 add_library(pwcoco_core STATIC ${PWCOCO_CORE_SOURCES})
 target_compile_features(pwcoco_core PUBLIC cxx_std_17)
 target_include_directories(pwcoco_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set_target_properties(pwcoco_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 if(UNIX AND NOT APPLE AND NOT WIN32)
   target_link_libraries(pwcoco_core PRIVATE stdc++fs)
 endif()

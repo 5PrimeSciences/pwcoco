@@ -4,6 +4,8 @@ from pwcoco._pwcoco import (
     Reference,
     initial_coloc,
     pwcoco_sub,
+)
+from pwcoco._pwcoco import (
     run_core as _run_core,
 )
 from pwcoco._version import __version__

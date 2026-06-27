@@ -20,13 +20,13 @@ jobs:
         run: uv pip install pre-commit ruff pytest scikit-build-core nanobind cmake ninja
 
       - name: Pre-commit (lint, format, version/changelog, clang-format)
-        run: uv run pre-commit run --all-files
+        run: pre-commit run --all-files
 
       - name: Build extension
         run: uv pip install -e . --no-build-isolation
 
       - name: Tests
-        run: uv run pytest tests/ -v
+        run: pytest tests/ -v
 
   cpp-build:
     runs-on: ubuntu-latest
@@ -51,4 +51,4 @@ jobs:
         run: ctest --test-dir build --output-on-failure
 
       - name: Golden e2e regression (CLI)
-        run: uv run pytest tests/test_e2e_cli.py -v
+        run: pytest tests/test_e2e_cli.py -v
