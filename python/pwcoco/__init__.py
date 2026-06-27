@@ -72,7 +72,9 @@ def _cli_args_from_run(
 
 
 def run(bfile, sum_stats1, sum_stats2, *, out="pwcoco_out", log="pwcoco_log", **kwargs):
-    cfg = config_from_cli_args(_cli_args_from_run(bfile, sum_stats1, sum_stats2, out=out, log=log, **kwargs))
+    cfg = config_from_cli_args(
+        _cli_args_from_run(bfile, sum_stats1, sum_stats2, out=out, log=log, **kwargs)
+    )
     rc = _run_core(cfg)
     if rc != 0:
         raise RuntimeError(f"PWCoCo failed with exit code {rc}")
