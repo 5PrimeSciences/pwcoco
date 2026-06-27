@@ -30,6 +30,7 @@ input = "python/pwcoco/_version.py"
 
 [tool.scikit-build]
 cmake.version = ">=3.15"
+cmake.build-type = "Release"
 wheel.py-api = "cp312"
 wheel.packages = ["python/pwcoco"]
 build-dir = "build/{wheel_tag}"
