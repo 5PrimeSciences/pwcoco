@@ -62,6 +62,7 @@ endif()
 
 add_library(pwcoco_cli STATIC src/cli.cpp)
 target_include_directories(pwcoco_cli PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set_target_properties(pwcoco_cli PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_executable(pwcoco src/options.cpp)
 target_link_libraries(pwcoco PRIVATE pwcoco_cli pwcoco_core)
