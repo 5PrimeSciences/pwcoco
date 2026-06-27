@@ -3,6 +3,7 @@
 #include <nanobind/stl/vector.h>
 
 #include "data.h"
+#include "options.h"
 #include "pwcoco_run.h"
 
 namespace nb = nanobind;
@@ -68,6 +69,22 @@ NB_MODULE(_pwcoco, m)
 	    .def("read_bed", &reference::read_bedfile, nb::arg("bedfile"))
 	    .def_prop_ro("failed", &reference::has_failed)
 	    .def_prop_ro("ready", &reference::is_ready);
+
+	m.def(
+	    "config_from_cli_args",
+	    [](const std::vector<std::string> &args) {
+		    PwCoCoConfig cfg;
+		    std::vector<std::string> storage(args.begin(), args.end());
+		    std::vector<char *> argv;
+		    argv.reserve(storage.size() + 1);
+		    argv.push_back(const_cast<char *>("pwcoco"));
+		    for (auto &s : storage)
+			    argv.push_back(s.data());
+		    parse_cli(static_cast<int>(argv.size()), argv.data(), cfg);
+		    return cfg;
+	    },
+	    nb::arg("args"),
+	    "Build PwCoCoConfig from CLI-style flag arguments.");
 
 	m.def(
 	    "run_core",

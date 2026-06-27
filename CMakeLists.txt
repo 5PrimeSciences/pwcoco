@@ -71,7 +71,7 @@ if(SKBUILD)
   find_package(nanobind CONFIG REQUIRED)
 
   nanobind_add_module(_pwcoco python/bindings.cpp)
-  target_link_libraries(_pwcoco PRIVATE pwcoco_core)
+  target_link_libraries(_pwcoco PRIVATE pwcoco_core pwcoco_cli)
   target_include_directories(_pwcoco PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
   install(TARGETS _pwcoco LIBRARY DESTINATION pwcoco)
