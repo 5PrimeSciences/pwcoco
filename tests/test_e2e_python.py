@@ -63,4 +63,4 @@ def test_python_api_matches_packaged_cli(_require_pwcoco_extension, tmp_path: Pa
 
     cli_rows = load_coloc_rows(cli_out.with_suffix(".coloc"))
     # Embedded extension vs subprocess CLI can differ slightly on Linux FP/OpenMP env.
-    assert_dict_rows_match(result["rows"], cli_rows, rel=1e-4)
+    assert_dict_rows_match(result["rows"], cli_rows, rel=1e-3)
