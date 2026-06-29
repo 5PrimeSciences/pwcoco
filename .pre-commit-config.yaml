@@ -1,0 +1,36 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^(python/|tests/|scripts/).*\.py$
+      - id: ruff-format
+        files: ^(python/|tests/|scripts/).*\.py$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(include/|pwcoco_win/)
+      - id: end-of-file-fixer
+        exclude: ^(include/|pwcoco_win/)
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v19.1.0
+    hooks:
+      - id: clang-format
+        types_or: [c++, c]
+        files: ^src/
+
+  - repo: local
+    hooks:
+      - id: check-version-changelog
+        name: version matches CHANGELOG
+        entry: python scripts/check_version.py
+        language: python
+        pass_filenames: false
+        always_run: true

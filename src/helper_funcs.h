@@ -42,7 +42,9 @@ double lm_fixed(const std::vector<double> &x, const std::vector<double> &y);
 bool file_is_empty(std::ifstream &pFile);
 bool isNumber(std::string s);
 
-//template<typename KeyType, typename LeftValue, typename RightValue>
-//std::map<KeyType, std::pair<LeftValue, RightValue> > IntersectMaps(const std::map<KeyType, LeftValue> &left, const std::map<KeyType, RightValue> &right);
+// template<typename KeyType, typename LeftValue, typename RightValue>
+// std::map<KeyType, std::pair<LeftValue, RightValue> > IntersectMaps(const std::map<KeyType, LeftValue> &left, const
+// std::map<KeyType, RightValue> &right);
 
-//std::map<std::string, int> vm_intersect(const std::map<std::string, int> &left, const std::vector<std::string> &right);
+// std::map<std::string, int> vm_intersect(const std::map<std::string, int> &left, const std::vector<std::string>
+// &right);

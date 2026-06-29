@@ -1,0 +1,21 @@
+{
+  "kwargs": {
+    "maf": 0.0001,
+    "init_h4": 80,
+    "top_snp": 5,
+    "freq_threshold": 0.5,
+    "threads": 1
+  },
+  "extra_args": [
+    "--maf", "0.0001",
+    "--init_h4", "80",
+    "--top_snp", "5",
+    "--freq_threshold", "0.5",
+    "--threads", "1"
+  ],
+  "coloc_file": "atp1a4.coloc",
+  "included_files": [
+    "atp1a4.atp1a4_test.exp.txt.included",
+    "atp1a4.atp1a4_test.out.txt.included"
+  ]
+}

@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v8.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+          enable-cache: true
+
+      - name: Install dev deps
+        run: uv pip install pre-commit ruff pytest scikit-build-core nanobind cmake ninja
+
+      - name: Pre-commit (lint, format, version/changelog, clang-format)
+        run: pre-commit run --all-files
+
+      - name: Build extension
+        run: uv pip install --reinstall -e . --no-build-isolation
+
+      - name: Tests
+        run: pytest tests/ -v
+
+  cpp-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v8.2.0
+        with:
+          python-version: "3.12"
+          activate-environment: true
+          enable-cache: true
+
+      - name: Install build and test deps
+        run: uv pip install cmake ninja pytest
+
+      - name: Build CLI and C++ tests
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+
+      - name: C++ unit tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Golden e2e regression (CLI)
+        run: pytest tests/test_e2e_cli.py -v
