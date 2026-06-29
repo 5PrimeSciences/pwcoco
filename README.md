@@ -22,6 +22,7 @@ Please cite our [pre-print](https://doi.org/10.1101/2022.08.08.503158)!
 ```
 
 ## Requirements
+- Python >= 3.12 (for the pip package and Python API)
 - C++17 or newer
 - Cmake >= 3.10
 

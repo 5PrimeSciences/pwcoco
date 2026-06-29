@@ -8,9 +8,12 @@ dynamic = ["version"]
 description = "Pair-wise Conditional and Colocalisation analysis"
 readme = "README.md"
 license = { text = "GPL-3.0-or-later" }
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: C++",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
@@ -37,7 +40,7 @@ build-dir = "build/{wheel_tag}"
 
 [tool.ruff]
 line-length = 100
-target-version = "py39"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]

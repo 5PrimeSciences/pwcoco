@@ -15,13 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - feat: expose `Phenotype`, `Reference`, `initial_coloc`, and `pwcoco_sub` for programmatic use
 - feat: golden e2e regression tests for CLI and Python API
 - feat: pre-commit hooks (ruff, clang-format, version/changelog check)
-- feat: GitHub Actions CI (lint, format, build, golden tests)
+- feat: GitHub Actions CI (lint, format, build, golden tests; Python 3.12–3.14)
 
 ### Changed
 
 - refactor: extract C++ orchestration into `pwcoco_core` library (`pwcoco_run.cpp`)
 - refactor: slim `options.cpp` to CLI parsing only
 - refactor: replace raw pointer ownership with `std::unique_ptr` in run path
+- require Python >= 3.12 for the pip package (stable ABI wheel targets CPython 3.12+)
 
 ### Removed
 
